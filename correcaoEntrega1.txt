@@ -1,0 +1,39 @@
+Pontos positivos: 
+
++ Organização/apresentação muito boa. 
++ Organização em pacotes refletida em código. 
+
+
+
+
+Pontos negativos: 
+
+- Associação Despesa --> Categoria está em sentido contrário (-10%).
+- Faltam multiplicidades nas associações (-10%). 
+- Associacoes com classe Republica (AlunoServico --> Republica, DespesaServico
+  --> Republica, CategoriaServico --> Republica) são *dependências* e não
+  associações direcionais. (-10%)
+- Uso de composição entre Categoria --> Despesa. Composição é um outro tipo de
+  associação, não apresentada em sala, e que não cabe nesse contexto. (-10%)
+
+
+
+Dúvidas: 
+
+
+
+
+Comentários: 
+
+O trabalho está bem apresentado mas tem alguns furos na sua estrutura. Por
+exemplo, o uso de composição ao inves de associações direcionais, o uso de
+relações de dependências, falta de multiplicidades, dentre outros... Sugiro o
+uso de herança para calculo segundo as regras de divisão de despesas
+(igualitaria e proporcional). O trabalho está bem encaminhado, mas precisa de
+uma revisão nos pontos mencionados anteriormente. 
+
+
+
+
+Nota: 
+60/100 pontos.
