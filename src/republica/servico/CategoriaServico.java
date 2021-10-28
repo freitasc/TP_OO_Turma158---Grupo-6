@@ -5,7 +5,7 @@ import republica.modelo.Categoria;
 import java.util.List;
 import java.util.Optional;
 
-public class CategoriaServico {
+public class CategoriaServico extends Categoria {
 
     public boolean cadastrar(Categoria categoria) {
         return true;
