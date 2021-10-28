@@ -1,26 +1,60 @@
 package republica.controlador;
 
-import republica.modelo.Aluno;
+import republica.servico.CategoriaServico;
+
+import javax.swing.JOptionPane;
+
 import republica.modelo.Categoria;
-import republica.modelo.Despesa;
 
 public class Republica {
 
-    public void cadastrarAluno(Aluno aluno) {}
-    public void removerAluno(Aluno aluno) {}
-    public void buscarAlunoPorId(int id) {}
-    public void listarAlunos() {}
-    
-    public void cadastrarDespesa(Despesa despesa) {}
-    public void removerDespesa(Despesa despesa) {}
-    public void buscarDespesaPorId(int id) {}
-    public void listarDespesas() {}
-    
-    public void cadastrarCategoria(Categoria categoria) {}
-    public void removerCategoria(Categoria categoria) {}
-    public void buscarCategoriaPorId(int id) {}
-    public void listarCategorias() {}
+	public static void main(String[] args) {
 
-    public void calcularPagamentoIgualitario() {}
-    public void calcularPagamentoProporcional() {}
+		String strOpcao;
+    	
+		strOpcao = JOptionPane.showInputDialog("Bem vindo ao app de divisão de despesas mensais!!!"
+    			+ "\nEscolha uma opção:"
+    			+ "\n	1-Pessoas"
+    			+ "\n	2-Despesas"
+    			+ "\n	3-Categorias");
+		
+		int opcao = Integer.parseInt(strOpcao);
+		
+		System.out.println(opcao);
+    	
+    	
+		switch(opcao) {
+		
+		case 1: 
+				
+			break;
+		case 2:
+				
+			break;
+		case 3:
+			String strOpcaoCat;
+			
+			strOpcaoCat = JOptionPane.showInputDialog("|CATEGORIAS|"
+					+ "\n	O que deseja fazer:"
+					+ "\n	1-Cadastrar categoria"
+					+ "\n	2-Listar categorias"
+					+ "\n	3-Buscar categoria por id"
+					+ "\n	4-Remover categoria");
+			 
+			int opcaoCat = Integer.parseInt(strOpcaoCat);
+			
+			switch(opcaoCat) {
+				
+			case 1:
+				Categoria cat = new CategoriaServico();    	
+				CategoriaServico a = (CategoriaServico) cat;
+				a.cadastrar(a);
+				break;	
+			}
+			break;
+		}
+		    	
+    
+    	
+    }
 }
