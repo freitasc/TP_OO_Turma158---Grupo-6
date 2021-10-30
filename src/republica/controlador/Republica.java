@@ -57,7 +57,10 @@ public class Republica {
 						+ "\n	4 - Remover despesa");
 				int opcaoDes = Integer.parseInt(strOpcaoDes);
 				switch(opcaoDes) {
-					case 1:	/*TODO: CADASTRA*/
+					case 1:	
+                                            Despesa dp = new DespesaServico();    	
+                                            DespesaServico d = (DespesaServico) dp;
+                                            d.cadastrar(d);
 						break;
 					case 2: /*TODO: LISTA*/
 						break;
