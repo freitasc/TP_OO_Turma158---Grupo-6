@@ -1,59 +1,60 @@
 package republica.servico;
 
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import republica.modelo.Despesa;
 import java.lang.String;
 
+
+
 public class DespesaServico extends Despesa{
 
-    List<Despesa> despesas;
-    String nomeArquivo = "Despesas1.txt";
+    public boolean cadastrar(Despesa despesa) {
 
-    public DespesaServico() {
-        despesas = new LinkedList<Despesa>();
-        }
-    
+		File bw = null;
+		FileWriter fw = null;
+		BufferedWriter buffWrite = null;
 
-    public void cadastrar(republica.modelo.Despesa despesa){
-        descricao = JOptionPane.showInputDialog("Informe a descrição da             despesa: ");
-        String valorDp = JOptionPane.showInputDialog("Informe o valor da            despesa: ");
-        valor = Float.parseFloat(valorDp);
-        
-        /*Despesa d = new Despesa(descricao, valor); erro nesta linha*/
-
-        boolean resposta = despesas.add(d);
-        if (resposta)
-                  JOptionPane.showMessageDialog (null, "Despesa cadastrada com sucesso");
-        return;
-	 }
-    public void gravarAlunos() {
-		BufferedWriter buffer = null;
-		FileWriter out = null;
-		
 		try {
-			out = new FileWriter(nomeArquivo);
-			buffer = new BufferedWriter(out);
-			
-			for (Despesa d : despesas) {
-				buffer.write(d.toString());
-				buffer.write('\n');
+
+			bw = new File("./Despesa.txt");
+			fw = new FileWriter(bw);
+			buffWrite = new BufferedWriter(fw);
+                        
+                        String idDp = JOptionPane.showInputDialog("Id da despesa: ");
+			despesa.id = Integer.parseInt(idDp);
+			System.out.println(despesa.id);
+			buffWrite.append(despesa.id + " \n ");
+
+			despesa.descricao = JOptionPane.        showInputDialog("Digite a descrição da despesa: ");
+			System.out.println(despesa.descricao);
+			buffWrite.append(despesa.descricao + " | ");
+
+                        String valorDp = JOptionPane.showInputDialog("Digite o valor da despesa:");
+                        valor = Float.parseFloat(valorDp);
+			System.out.println(despesa.valor);
+			buffWrite.append(despesa.valor + " | ");
+
+			                 JOptionPane.showMessageDialog(null, "Despesa cadastrada com sucesso");
+
+			return true;
+
+		} catch (Exception ecxp) {
+			ecxp.printStackTrace(System.out);
+			return false;
+		} finally {
+			try {
+				buffWrite.close();
+			} catch (IOException ecxp) {
+				ecxp.printStackTrace();
 			}
-			
-			buffer.close();
-		} catch (IOException e) {
+		}
 			
 		}
-    }
-			
-			buffer.close();
-		} catch (IOException e) {
-			
-		}
-    }
+   
 }
+
+
