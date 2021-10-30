@@ -1,5 +1,7 @@
 package republica.controlador;
 
+import java.io.IOException;
+
 import javax.swing.JOptionPane;
 
 import republica.modelo.Categoria;
@@ -11,7 +13,7 @@ import republica.servico.DespesaServico;
 
 public class Republica {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		String strOpcao;
     	
