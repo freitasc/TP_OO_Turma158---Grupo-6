@@ -35,6 +35,8 @@ public class Republica {
 				
 				switch(opcaoAln) {
 					case 1:	/*TODO: CADASTRA*/
+						AlunoServico Pessoa = new AlunoServico();
+						Pessoa.cadastrar();
 						break;
 					case 2: /*TODO: LISTA*/
 						break;

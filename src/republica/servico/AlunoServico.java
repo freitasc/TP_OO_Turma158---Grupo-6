@@ -15,7 +15,7 @@ import java.io.File;
 
 public class AlunoServico{
 
-    public boolean cadastrar(Aluno aluno) {
+    public boolean cadastrar() {
 
         Aluno pessoa = new Aluno();
 
@@ -24,14 +24,14 @@ public class AlunoServico{
 		BufferedWriter bufferAluno = null;        
 
         try{
-            Alunofile = new File("./Aluno.txt");
+            Alunofile = new File("src/republica/dados/aluno.txt");
             writeAluno = new FileWriter(Alunofile);
             bufferAluno = new BufferedWriter(writeAluno);
 
             String strID = JOptionPane.showInputDialog(null, "Id da pessoa: ");
             int id = Integer.parseInt(strID);
             pessoa.setId (id);
-            bufferAluno.append (pessoa.getId() + "\n");
+            bufferAluno.append (pessoa.getId() + " | ");
 
             String Nome = JOptionPane.showInputDialog(null, "Nome da pessoa: ");
             pessoa.setNome (Nome);
