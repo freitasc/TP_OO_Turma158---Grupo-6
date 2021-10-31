@@ -25,8 +25,9 @@ public class AlunoServico{
 
         try{
             Alunofile = new File("src/republica/dados/aluno.txt");
-            writeAluno = new FileWriter(Alunofile);
+            writeAluno = new FileWriter(Alunofile, true);
             bufferAluno = new BufferedWriter(writeAluno);
+
 
             String strID = JOptionPane.showInputDialog(null, "Id da pessoa: ");
             int id = Integer.parseInt(strID);
@@ -44,7 +45,7 @@ public class AlunoServico{
             String strRenda = JOptionPane.showInputDialog(null, "Renda da pessoa: ");
             float Renda = Float.parseFloat(strRenda);
             pessoa.setRenda(Renda);
-            bufferAluno.append (pessoa.getRenda() + " | ");
+            bufferAluno.append (pessoa.getRenda() + " |\n");
 
             return true;
         } catch (Exception exception){
