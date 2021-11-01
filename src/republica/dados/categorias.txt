@@ -1,1 +1,3 @@
-1,gastos,luz
+2,telecomunicação,internet
+3,residencia,aluguel
+4,residencia,manutençao
