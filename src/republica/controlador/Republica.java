@@ -37,7 +37,7 @@ public class Republica {
 				int opcaoAln = Integer.parseInt(strOpcaoAln);
 				
 				switch(opcaoAln) {
-					case 1:	/*Cadastra em aluno.txt*/
+					case 1:	/*CADASTRA ALUNO EM aluno.txt*/
 						Aluno p = new Aluno();
 
 						String strID = JOptionPane.showInputDialog(null, "Id da pessoa: ");
@@ -57,7 +57,7 @@ public class Republica {
 						AlunoServico Pessoa = new AlunoServico();
 						Pessoa.cadastrar(p);
 						break;
-					case 2: /*Lista os dados de aluno.txt*/
+					case 2: /*LISTA ALUNOS EM aluno.txt*/
 						AlunoServico lista = new AlunoServico();
 						String todos = "";
 						for (Aluno a : lista.listar()){
@@ -68,7 +68,7 @@ public class Republica {
 						}
 						JOptionPane.showMessageDialog(null, todos);						
 						break;
-					case 3: /*TODO: BUSCA*/
+					case 3: /*BUSCA POR ID ALUNO EM aluno.txt*/
 						String strIdent = JOptionPane.showInputDialog(null, "Insira o ID da pessoa");
 						int indent = Integer.parseInt(strIdent);
 						AlunoServico busca = new AlunoServico();
@@ -84,7 +84,7 @@ public class Republica {
 							JOptionPane.showMessageDialog(null, "Não foi possível encontrar o ID!");
 						}
 						break;
-					case 4: /*TODO: REMOVE*/
+					case 4: /*REMOVE POR ID ALUNO EM aluno.txt*/
 						String strId = JOptionPane.showInputDialog("Insira o ID da pessoa que será removida");
 						int Id = Integer.parseInt(strId);
 
