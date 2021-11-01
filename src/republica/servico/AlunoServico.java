@@ -96,7 +96,54 @@ public class AlunoServico{
     }
 
     public boolean removerPorId(int id) {
-      return true;
+        File path = new File("src/republica/dados/aluno.txt");
+        FileReader fr = null;
+        BufferedReader leitorAluno = null;
+
+        FileWriter fw = null;
+        BufferedWriter escreveAluno = null;
+
+        try{
+            fr = new FileReader(path);
+            leitorAluno = new BufferedReader(fr);
+            
+            List<String> save = new ArrayList<String>();
+            String linha = leitorAluno.readLine();
+            
+            while(linha != null){
+                String[] inf = linha.split(",");
+                String strId = ("" + id);
+                if (inf[0].equals(strId) == false){
+                    save.add(linha);
+                }
+                linha = leitorAluno.readLine();
+            }
+
+            fw = new FileWriter(path);
+            escreveAluno = new BufferedWriter(fw);
+
+            for(int i = 0 ; i < save.size(); i++){
+                escreveAluno.write(save.get(i));
+                escreveAluno.newLine();
+            }
+            
+            return true;
+        }
+        catch(IOException e){ 
+            e.printStackTrace();  
+            return false;        
+        }
+        finally{
+            try{
+                leitorAluno.close();
+                
+                escreveAluno.close();
+            }
+            catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        
     }
 
     public Optional<Aluno> buscarPorId(int id) {

@@ -72,6 +72,16 @@ public class Republica {
 						
 						break;
 					case 4: /*TODO: REMOVE*/
+						String strId = JOptionPane.showInputDialog("Insira o ID da pessoa que será removida");
+						int Id = Integer.parseInt(strId);
+
+						AlunoServico remove = new AlunoServico();
+						if (remove.removerPorId(Id) == true){
+							JOptionPane.showMessageDialog(null, "Ação concluída com sucesso!");
+						}
+						else{
+							JOptionPane.showMessageDialog(null, "Ação falhou!");
+						}
 						break;
 				}
 				break;
