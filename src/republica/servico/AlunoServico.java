@@ -20,9 +20,7 @@ import java.io.FileReader;
 
 public class AlunoServico{
 
-    public boolean cadastrar() {
-
-        Aluno pessoa = new Aluno();
+    public boolean cadastrar(Aluno pessoa) {
 
         File Alunofile = null;
 		FileWriter writeAluno = null;
@@ -33,23 +31,12 @@ public class AlunoServico{
             writeAluno = new FileWriter(Alunofile, true);
             bufferAluno = new BufferedWriter(writeAluno);
 
-
-            String strID = JOptionPane.showInputDialog(null, "Id da pessoa: ");
-            int id = Integer.parseInt(strID);
-            pessoa.setId (id);
             bufferAluno.append (pessoa.getId() + ",");
 
-            String Nome = JOptionPane.showInputDialog(null, "Nome da pessoa: ");
-            pessoa.setNome (Nome);
             bufferAluno.append (pessoa.getNome() + ",");
 
-            String Email = JOptionPane.showInputDialog(null, "Email da pessoa: ");;
-            pessoa.setEmail (Email);
             bufferAluno.append (pessoa.getEmail() + ",");
 
-            String strRenda = JOptionPane.showInputDialog(null, "Renda da pessoa: ");
-            float Renda = Float.parseFloat(strRenda);
-            pessoa.setRenda(Renda);
             bufferAluno.append (pessoa.getRenda() + "\n");
 
             return true;
@@ -109,7 +96,7 @@ public class AlunoServico{
     }
 
     public boolean removerPorId(int id) {
-        return true;
+      return true;
     }
 
     public Optional<Aluno> buscarPorId(int id) {
