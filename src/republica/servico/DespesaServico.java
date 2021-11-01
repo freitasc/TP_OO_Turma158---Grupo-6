@@ -1,87 +1,101 @@
 package republica.servico;
 
+package republica.servico;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import javax.swing.JOptionPane;
 import republica.modelo.Despesa;
-import java.lang.String;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
-public class DespesaServico extends Despesa {
 
-    public boolean cadastrar(Despesa despesa) {
+
+public class DespesaServico {
+
+public  boolean cadastrar(Despesa despesa) {
 
         File bw = null;
-        FileWriter fw = null;
-        BufferedWriter buffWrite = null;
+	FileWriter fw = null;
+	BufferedWriter buffWrite = null;   
 
-        try {
-
-            bw = new File("./Despesa.txt");
+        try{
+            
+            bw = new File("src/republica/dados/Despesas.txt");
             fw = new FileWriter(bw, true);
             buffWrite = new BufferedWriter(fw);
 
-            String idDp = JOptionPane.showInputDialog("Id da despesa: ");
-            despesa.id = Integer.parseInt(idDp);
-            System.out.println(despesa.id);
-            buffWrite.append(despesa.id + ";");
+            buffWrite.append (despesa.getId() + ",");
 
-            despesa.descricao = JOptionPane.showInputDialog("Digite a descrição da despesa: ");
-            System.out.println(despesa.descricao);
-            buffWrite.append(despesa.descricao + ";");
+            buffWrite.append (despesa.getDescricao() + ",");
 
-            String valorDp = JOptionPane.showInputDialog("Digite o valor da despesa:");
-            valor = Float.parseFloat(valorDp);
-            System.out.println(despesa.valor);
-            buffWrite.append(despesa.valor + ".\n");
-
-            JOptionPane.showMessageDialog(null, "Despesa cadastrada com sucesso");
+            buffWrite.append (despesa.getValor() + "\n");
 
             return true;
-
-        } catch (Exception ecxp) {
-            ecxp.printStackTrace(System.out);
+            
+        } catch (Exception exception){
+            exception.printStackTrace();
             return false;
-        } finally {
-            try {
+        }
+        finally{
+            try{
                 buffWrite.close();
-            } catch (IOException ecxp) {
-                ecxp.printStackTrace();
             }
-        }
-
-    }
-
-    public void listar() {
-        List<String[]> lista = new ArrayList<>();
-        try {
-
-            FileReader fr = new FileReader("./Despesa.txt");
-            BufferedReader br = new BufferedReader(fr);
-
-            String str;
-            while ((str = br.readLine()) != null) {
-                lista.add(str.split(";"));
+            catch(IOException exception){
+                exception.printStackTrace();
             }
-            lista.forEach(a -> System.out.println(Arrays.toString(a)));
-
-            String textoArquivo = "";
-            for (String[] nome : lista) {
-                textoArquivo += nome + "\n";
-            }
-            JOptionPane.showMessageDialog(null, textoArquivo);
-
-        } catch (IOException e) {
-            System.out.println("Arquivo não encontrado!");
-
         }
     }
 
+   public List<Despesa> listar() {
+        List<Despesa> Despesas;
+        Despesas = new ArrayList<Despesa>();
+        File path = new File("src/republica/dados/Despesas.txt");
+
+        try (BufferedReader lerDep = new BufferedReader(new FileReader(path))) {
+            String linha = lerDep.readLine();
+            while(linha != null){
+               
+                Despesa temp = new Despesa();
+                
+                String[] Info = linha.split(",");
+                System.out.println(Info[0] + "/" + Info[1]);
+
+                int id = Integer.parseInt(Info[0]);
+                temp.setId(id);
+
+                System.out.println(id);
+
+                temp.setDescricao(Info[1]);
+
+                float valorDp = Float.parseFloat(Info[2]);
+                temp.setValor(valorDp);
+
+                Despesas.add(temp);
+                linha = lerDep.readLine();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+                     
+        }           
+        
+        return Despesas;
+    }
+    public boolean removerPorId(int id) {
+   
+
+    return false;
+   
+
+    }
+    public Optional<Despesa> buscarPorId(int id) {
+        
+    return null;
+    }
+    
 }
-
+        
