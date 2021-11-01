@@ -38,19 +38,38 @@ public class Republica {
 				
 				switch(opcaoAln) {
 					case 1:	/*Cadastra em aluno.txt*/
+						Aluno p = new Aluno();
+
+						String strID = JOptionPane.showInputDialog(null, "Id da pessoa: ");
+            			int id = Integer.parseInt(strID);
+            			p.setId (id);
+
+						String Nome = JOptionPane.showInputDialog(null, "Nome da pessoa: ");
+            			p.setNome (Nome);
+
+						String Email = JOptionPane.showInputDialog(null, "Email da pessoa: ");;
+            			p.setEmail (Email);
+
+						String strRenda = JOptionPane.showInputDialog(null, "Renda da pessoa: ");
+            			float Renda = Float.parseFloat(strRenda);
+           				p.setRenda(Renda);
+						
 						AlunoServico Pessoa = new AlunoServico();
-						Pessoa.cadastrar();
+						Pessoa.cadastrar(p);
 						break;
-					case 2: /*TODO: LISTA*/
+					case 2: /*Lista os dados de aluno.txt*/
 						AlunoServico lista = new AlunoServico();
+						String todos = "";
 						for (Aluno a : lista.listar()){
-							JOptionPane.showMessageDialog(null, a.getId() + " | " 
-															+ a.getNome() + " | "
-															+ a.getEmail() + " | " 
-															+ a.getRenda() + " |\n");
-						}						
+							todos = (todos + a.getId() + " | " 
+									+ a.getNome() + " | "
+									+ a.getEmail() + " | " 
+									+ a.getRenda() + " |\n");
+						}
+						JOptionPane.showMessageDialog(null, todos);						
 						break;
 					case 3: /*TODO: BUSCA*/
+						
 						break;
 					case 4: /*TODO: REMOVE*/
 						break;
