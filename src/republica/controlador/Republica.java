@@ -1,5 +1,8 @@
 package republica.controlador;
 
+import java.util.ArrayList;
+
+import javax.print.attribute.standard.JobHoldUntil;
 import javax.swing.JOptionPane;
 
 import republica.modelo.Categoria;
@@ -34,11 +37,18 @@ public class Republica {
 				int opcaoAln = Integer.parseInt(strOpcaoAln);
 				
 				switch(opcaoAln) {
-					case 1:	/*TODO: CADASTRA*/
+					case 1:	/*Cadastra em aluno.txt*/
 						AlunoServico Pessoa = new AlunoServico();
 						Pessoa.cadastrar();
 						break;
 					case 2: /*TODO: LISTA*/
+						AlunoServico lista = new AlunoServico();
+						for (Aluno a : lista.listar()){
+							JOptionPane.showMessageDialog(null, a.getId() + " | " 
+															+ a.getNome() + " | "
+															+ a.getEmail() + " | " 
+															+ a.getRenda() + " |\n");
+						}						
 						break;
 					case 3: /*TODO: BUSCA*/
 						break;
