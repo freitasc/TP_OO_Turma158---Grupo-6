@@ -147,7 +147,44 @@ public class AlunoServico{
     }
 
     public Optional<Aluno> buscarPorId(int id) {
-        return null;
+        File path = new File("src/republica/dados/aluno.txt");
+        FileReader fr = null;
+        BufferedReader leitorAluno = null;
+
+        Aluno save = new Aluno();
+        try {
+            fr = new FileReader(path);
+            leitorAluno = new BufferedReader(fr);
+
+            String linha = leitorAluno.readLine();
+            while(linha != null){
+                String[] strId = linha.split(",");
+                int ID = Integer.parseInt(strId[0]);
+                if (id == ID){
+                    float renda = Float.parseFloat(strId[3]);
+                    save.setId(id);
+                    save.setNome(strId[1]);
+                    save.setEmail(strId[2]);
+                    save.setRenda(renda);
+                    break;
+                }
+                linha = leitorAluno.readLine();
+            }
+
+            return Optional.of(save);
+        }catch(Exception e){
+            e.printStackTrace();  
+            return Optional.empty(); 
+        }
+        finally{
+            try{
+                leitorAluno.close();
+            }
+            catch(Exception e){
+                e.printStackTrace(); 
+            }
+            
+        }
     }
 
     
