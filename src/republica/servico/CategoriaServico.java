@@ -1,5 +1,6 @@
 package republica.servico;
 
+import republica.exception.CategoriaNaoInformadaException;
 import republica.modelo.Categoria;
 
 import java.io.*;
@@ -12,6 +13,8 @@ public class CategoriaServico {
     private final String ARQUIVO = "src/republica/dados/categorias.txt";
 
     public boolean cadastrar(Categoria categoria) {
+        if (categoria == null)
+            throw new CategoriaNaoInformadaException();
         List<Categoria> categorias = lerDoArquivo();
         categoria.setId(categorias.isEmpty() ? 1 : categorias.get(categorias.size() - 1).getId() + 1);
         categorias.add(categoria);
