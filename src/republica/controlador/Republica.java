@@ -1,5 +1,8 @@
 package republica.controlador;
 
+import java.util.ArrayList;
+
+import javax.print.attribute.standard.JobHoldUntil;
 import javax.swing.JOptionPane;
 
 import republica.modelo.Categoria;
@@ -34,13 +37,64 @@ public class Republica {
 				int opcaoAln = Integer.parseInt(strOpcaoAln);
 				
 				switch(opcaoAln) {
-					case 1:	/*TODO: CADASTRA*/
+					case 1:	/*CADASTRA ALUNO EM aluno.txt*/
+						Aluno p = new Aluno();
+
+						String strID = JOptionPane.showInputDialog(null, "Id da pessoa: ");
+            			int id = Integer.parseInt(strID);
+            			p.setId (id);
+
+						String Nome = JOptionPane.showInputDialog(null, "Nome da pessoa: ");
+            			p.setNome (Nome);
+
+						String Email = JOptionPane.showInputDialog(null, "Email da pessoa: ");;
+            			p.setEmail (Email);
+
+						String strRenda = JOptionPane.showInputDialog(null, "Renda da pessoa: ");
+            			float Renda = Float.parseFloat(strRenda);
+           				p.setRenda(Renda);
+						
+						AlunoServico Pessoa = new AlunoServico();
+						Pessoa.cadastrar(p);
 						break;
-					case 2: /*TODO: LISTA*/
+					case 2: /*LISTA ALUNOS EM aluno.txt*/
+						AlunoServico lista = new AlunoServico();
+						String todos = "";
+						for (Aluno a : lista.listar()){
+							todos = (todos + a.getId() + " | " 
+									+ a.getNome() + " | "
+									+ a.getEmail() + " | " 
+									+ a.getRenda() + " |\n");
+						}
+						JOptionPane.showMessageDialog(null, todos);						
 						break;
-					case 3: /*TODO: BUSCA*/
+					case 3: /*BUSCA POR ID ALUNO EM aluno.txt*/
+						String strIdent = JOptionPane.showInputDialog(null, "Insira o ID da pessoa");
+						int indent = Integer.parseInt(strIdent);
+						AlunoServico busca = new AlunoServico();
+						Aluno pesquisa = busca.buscarPorId(indent).orElse(null);
+						if (pesquisa.getNome() != null){
+							String achado = (pesquisa.getId() + " | " 
+											+ pesquisa.getNome() + " | "
+											+ pesquisa.getEmail() + " | " 
+											+ pesquisa.getRenda() + " |\n");
+							JOptionPane.showMessageDialog(null, achado);
+						}
+						else{
+							JOptionPane.showMessageDialog(null, "Não foi possível encontrar o ID!");
+						}
 						break;
-					case 4: /*TODO: REMOVE*/
+					case 4: /*REMOVE POR ID ALUNO EM aluno.txt*/
+						String strId = JOptionPane.showInputDialog("Insira o ID da pessoa que será removida");
+						int Id = Integer.parseInt(strId);
+
+						AlunoServico remove = new AlunoServico();
+						if (remove.removerPorId(Id) == true){
+							JOptionPane.showMessageDialog(null, "Ação concluída com sucesso!");
+						}
+						else{
+							JOptionPane.showMessageDialog(null, "Ação falhou!");
+						}
 						break;
 				}
 				break;
