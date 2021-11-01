@@ -69,7 +69,20 @@ public class Republica {
 						JOptionPane.showMessageDialog(null, todos);						
 						break;
 					case 3: /*TODO: BUSCA*/
-						
+						String strIdent = JOptionPane.showInputDialog(null, "Insira o ID da pessoa");
+						int indent = Integer.parseInt(strIdent);
+						AlunoServico busca = new AlunoServico();
+						Aluno pesquisa = busca.buscarPorId(indent).orElse(null);
+						if (pesquisa.getNome() != null){
+							String achado = (pesquisa.getId() + " | " 
+											+ pesquisa.getNome() + " | "
+											+ pesquisa.getEmail() + " | " 
+											+ pesquisa.getRenda() + " |\n");
+							JOptionPane.showMessageDialog(null, achado);
+						}
+						else{
+							JOptionPane.showMessageDialog(null, "Não foi possível encontrar o ID!");
+						}
 						break;
 					case 4: /*TODO: REMOVE*/
 						String strId = JOptionPane.showInputDialog("Insira o ID da pessoa que será removida");
