@@ -12,12 +12,15 @@ import republica.modelo.Categoria;
 import republica.servico.DespesaServico;
 import republica.servico.AlunoServico;
 import republica.servico.CategoriaServico;
+import republica.servico.CalculoIgualitario;
+import republica.servico.CalculoProporcional;
 
 public class Republica {
 
     public static void main(String[] args) throws IOException {
         String strOpcao;
         int opcao ;
+        float calculoIgual = 0;
 
         do {
         	strOpcao = JOptionPane.showInputDialog("Bem vindo ao app de divisao de despesas mensais!"
@@ -25,10 +28,13 @@ public class Republica {
 	                + "\n	1 - Pessoas"
 	                + "\n	2 - Despesas"
 	                + "\n	3 - Categorias"
-	                + "\n	4 - Sair");
+	                + "\n	4 - Calcular por renda igualitaria"
+	                + "\n	5 - Calcular por renda proporcional"
+	                + "\n	6 - Sair");
 	        opcao = Integer.parseInt(strOpcao);
 	        System.out.println(opcao);
-	        switch(opcao) {
+	        
+			switch(opcao) {
 	           case 1: /*Case com cada um dos servicos de Alunos*/
                 String strOpcaoAln;
                 strOpcaoAln = JOptionPane.showInputDialog("|PESSOAS|"
@@ -56,6 +62,8 @@ public class Republica {
                     String strRenda = JOptionPane.showInputDialog(null, "Renda da pessoa: ");
                           float Renda = Float.parseFloat(strRenda);
                           p.setRenda(Renda);
+                          
+                          
 
                     AlunoServico Pessoa = new AlunoServico();
                     Pessoa.cadastrar(p);
@@ -114,18 +122,20 @@ public class Republica {
 
                 switch (opCadDep) {
                     case 1:
+                    	
+                    	
                         Despesa d = new Despesa();
 
                         String strID = JOptionPane.showInputDialog(null, "Id da Despesa: ");
                         int id = Integer.parseInt(strID);
                         d.setId(id);
 
-                        String Descricao = JOptionPane.showInputDialog(null, "Digite a descrição da despesa: ");
+                        String Descricao = JOptionPane.showInputDialog(null, "Digite a descricao da despesa: ");
                         d.setDescricao(Descricao);
 
                         String valorDp = JOptionPane.showInputDialog(null, "Digite o valor da despesa: ");
                         float valor = Float.parseFloat(valorDp);
-                        d.setValor(valor);
+                        d.setValor(valor);               
                         
                         String IdCatDp = JOptionPane.showInputDialog(null, "Digite o ID da categoria da despesa: ");
                         int idcat = Integer.parseInt(IdCatDp);
@@ -138,7 +148,7 @@ public class Republica {
                             despesa.cadastrar(d);
                         }
                         else {
-                            JOptionPane.showMessageDialog(null, "Ação falhou! O ID da categoria é invalido!");
+                            JOptionPane.showMessageDialog(null, "Busca falhou! O ID invalido!");
                         }
                         break;
 
@@ -169,20 +179,20 @@ public class Republica {
                           JOptionPane.showMessageDialog(null, achado);
                         }
                         else{
-                          JOptionPane.showMessageDialog(null, "Não foi possível encontrar o ID!");
+                          JOptionPane.showMessageDialog(null, "Nao foi possivel encontrar o ID!");
                         }
                         break;
                         
                     case 4:
-                    	String strId = JOptionPane.showInputDialog("Insira o ID da pessoa que será removida");
+                    	String strId = JOptionPane.showInputDialog("Insira o ID da pessoa que sera removida");
                         int Id = Integer.parseInt(strId);
 
                         DespesaServico remove = new DespesaServico();
                         if (remove.removerPorId(Id) == true){
-                          JOptionPane.showMessageDialog(null, "Ação concluída com sucesso!");
+                          JOptionPane.showMessageDialog(null, "Remocao concluida com sucesso!");
                         }
                         else{
-                          JOptionPane.showMessageDialog(null, "Ação falhou!");
+                          JOptionPane.showMessageDialog(null, "Remocao falhou!");
                         }
                         break;
                 }
@@ -243,10 +253,23 @@ public class Republica {
 	                }
 	
 	            /*TODO: OPCAO PARA O USUARIO PRINTAR REGRA IGUALITARIA -> calcularPagamentoRegraIgualitaria()*/
+	            
+	            case 4: 
+	            	
+	            	CalculoIgualitario calculoI = new CalculoIgualitario();
+	            	calculoIgual = 100/calculoI.qtdPessoa();
+	            	JOptionPane.showMessageDialog(null, "O calculo por regra igualitaria e " + calculoIgual + "% da dispesa total por pessoa");
+	            	break;
+	            
 	            /*TODO: OPCAO PARA O USUARIO PRINTAR PRINT DE REGRA PROPORCIONAL -> calcularPagamentoRegraProporcional()*/
 	
+	            case 5:
+	            	CalculoProporcional calculoP = new CalculoProporcional();
+	            	calculoP.porcentagem(calculoP.rendaTotal());
+	            	
+	            	break;
 	        }
-	    } while(opcao != 4);
+	    } while(opcao != 6);
 
     } 
 }

@@ -1,3 +1,4 @@
 2,telecomunicação,internet
 3,residencia,aluguel
 4,residencia,manutençao
+5,telecomunicação,telefone
