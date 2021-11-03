@@ -24,7 +24,6 @@ public  boolean cadastrar(Despesa despesa) {
     File bw = null;
 	FileWriter fw = null;
 	BufferedWriter buffWrite = null;   
-
         try{
             
             bw = new File("src/republica/dados/despesas_" + formatter.format(date) + ".txt");
