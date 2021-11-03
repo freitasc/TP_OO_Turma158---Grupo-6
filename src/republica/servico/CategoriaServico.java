@@ -7,11 +7,16 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
+import republica.modelo.Categoria;
 
 public class CategoriaServico {
 
     private final String ARQUIVO = "src/republica/dados/categorias.txt";
-
+  
     public boolean cadastrar(Categoria categoria) {
         if (categoria == null)
             throw new CategoriaNaoInformadaException();
