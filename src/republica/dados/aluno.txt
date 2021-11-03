@@ -1,0 +1,4 @@
+1,Pedro,pedro@gmail.com,1000.0
+2,Gabriel,gabriel@gmail.com,500.0
+3,João,joao@gmail.com,2000.0
+4,Rafael,rafa@gmail.com,4000.0
