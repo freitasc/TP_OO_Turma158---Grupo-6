@@ -1,8 +1,8 @@
 package republica.modelo;
 
 public class Despesa {
-
-    private int id;
+	
+	private int id;
     private String descricao;
     private float valor;
     private int categoriaid;
@@ -35,4 +35,3 @@ public class Despesa {
     public int getIdCategoria (){
         return categoriaid;
     }
-}

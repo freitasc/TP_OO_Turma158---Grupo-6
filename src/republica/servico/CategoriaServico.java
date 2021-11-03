@@ -1,9 +1,11 @@
 package republica.servico;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import republica.exception.CategoriaNaoInformadaException;
+import republica.modelo.Categoria;
+
+import java.io.*;
+import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -12,58 +14,63 @@ import javax.swing.JOptionPane;
 
 import republica.modelo.Categoria;
 
-public class CategoriaServico extends Categoria {
+public class CategoriaServico {
 
-	public boolean cadastrar(Categoria categoria) {
+    private final String ARQUIVO = "src/republica/dados/categorias.txt";
+    public boolean cadastrar(Categoria categoria) {
+        if (categoria == null)
+            throw new CategoriaNaoInformadaException();
+        List<Categoria> categorias = lerDoArquivo();
+        categoria.setId(categorias.isEmpty() ? 1 : categorias.get(categorias.size() - 1).getId() + 1);
+        categorias.add(categoria);
+        return escreverNoArquivo(categorias);
+    }
 
-		File f=null;
-		FileWriter fw =null;
-		BufferedWriter buffWrite = null;
+    public boolean removerPorId(int id) {
+        List<Categoria> categorias = lerDoArquivo();
+        if (categorias.removeIf(categoria -> categoria.getId() == id)) {
+            escreverNoArquivo(categorias);
+            return true;
+        }
+        return false;
+    }
 
-		try {
-			
-			f = new File("./categorias.txt");
-			fw = new FileWriter(f);
-			buffWrite = new BufferedWriter(fw);
+    public Optional<Categoria> buscarPorId(int id) {
+        List<Categoria> categorias = lerDoArquivo();
+        return categorias.stream().filter(categoria -> categoria.getId() == id).findFirst();
+    }
 
-			categoria.descricao = JOptionPane.showInputDialog("Digite a descrição da categoria:");
-			System.out.println(categoria.descricao);
-			buffWrite.append(categoria.descricao + " | ");
+    public List<Categoria> listar() {
+        return lerDoArquivo();
+    }
 
-			categoria.subcategoria = JOptionPane.showInputDialog("Digite a subcategoria:");
-			System.out.println(categoria.subcategoria);
-			buffWrite.append(categoria.subcategoria + " | ");
+    private boolean escreverNoArquivo(List<Categoria> categorias) {
+        try (BufferedWriter escritor = new BufferedWriter(new FileWriter(ARQUIVO))) {
+            for (Categoria categoria : categorias) {
+                escritor.append(Integer.toString(categoria.getId())).append(",")
+                        .append(categoria.getDescricao()).append(",")
+                        .append(categoria.getSubcategoria()).append("\n");
+            }
+            return true;
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao acessar arquivo. " + e.getMessage());
+        }
+    }
 
-			String strId = JOptionPane.showInputDialog("Digite o id da categoria: ");
-			categoria.id = Integer.parseInt(strId);
-			System.out.println(categoria.id);
-			buffWrite.append(categoria.id + " \n ");
-
-			return true;
-
-		} catch (Exception e) {
-			e.printStackTrace(System.out);
-			System.out.println("oi pedro");
-			return false;
-		} finally {
-			try {
-				buffWrite.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-	}
-
-	public boolean removerPorId(int id) {
-		return true;
-	}
-
-	public Optional<Categoria> buscarPorId(int id) {
-		return null;
-	}
-
-	public List<Categoria> listar() {
-		return null;
-	}
+    private List<Categoria> lerDoArquivo() {
+        try (BufferedReader leitor = new BufferedReader(new FileReader(ARQUIVO))) {
+            List<Categoria> categorias = new ArrayList<>();
+            String categoriaString;
+            do {
+                categoriaString = leitor.readLine();
+                if (categoriaString != null) {
+                    String[] categoriaArray = categoriaString.split(",");
+                    categorias.add(new Categoria(Integer.parseInt(categoriaArray[0]), categoriaArray[1], categoriaArray[2]));
+                }
+            } while (categoriaString != null);
+            return categorias;
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao acessar arquivo. " + e.getMessage());
+        }
+    }
 }
