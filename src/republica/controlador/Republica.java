@@ -2,13 +2,16 @@ package republica.controlador;
 
 import java.io.IOException;
 
-import republica.servico.DespesaServico;
-
 import java.util.Optional;
-import java.util.ArrayList;
-import javax.print.attribute.standard.JobHoldUntil;
 import javax.swing.JOptionPane;
+
 import republica.modelo.Despesa;
+import republica.modelo.Aluno;
+import republica.modelo.Categoria;
+
+import republica.servico.DespesaServico;
+import republica.servico.AlunoServico;
+import republica.servico.CategoriaServico;
 
 public class Republica {
 
@@ -124,12 +127,19 @@ public class Republica {
                         float valor = Float.parseFloat(valorDp);
                         d.setValor(valor);
                         
-                        String IdCatDp = JOptionPane.showInputDialog(null, "Digite o id da categoria da despesa: ");
+                        String IdCatDp = JOptionPane.showInputDialog(null, "Digite o ID da categoria da despesa: ");
                         int idcat = Integer.parseInt(IdCatDp);
                         d.setIdCategoria(idcat);
-
-                        DespesaServico despesa = new DespesaServico();
-                        despesa.cadastrar(d);
+                        
+                        CategoriaServico categoriaServico = new CategoriaServico();
+                        Optional<Categoria> categoria = categoriaServico.buscarPorId(idcat);
+                        if (categoria.isPresent()) {
+                            DespesaServico despesa = new DespesaServico();
+                            despesa.cadastrar(d);
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(null, "Ação falhou! O ID da categoria é invalido!");
+                        }
                         break;
 
                     case 2:
