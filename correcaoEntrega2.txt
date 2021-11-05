@@ -1,0 +1,33 @@
+Criterios: 
+ * Crit. 1 - Os cadastros funcionam adequadamente?: OK
+ * Crit. 2 - Excecoes sao lancadas adequadamente?: NOK (-35 pontos)
+ * Crit. 3 - Associações sao realizadas adequadamente?: NOK, heranca nao foi
+   utilizada (-7 pontos)
+ * Crit. 4 - Calculos estao corretos?: +/-, calculo de divisao igualitaria nao
+   está sendo feito (-10 pontos)
+
+Pontos positivos: 
+
+
+
+
+
+Pontos negativos: 
+
+
+
+
+
+Dúvidas: 
+
+
+
+
+
+Comentários: 
+
+
+
+
+Nota: 
+48/100 pontos.
